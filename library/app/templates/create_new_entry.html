@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Library
+{% endblock %}
+
+{% block content %}
+    <h1 class = "text-center mt-4">Edit Your Book Details</h1>
+    <div class="container row gap-3 m-5">
+        {% if form.instance.pk %}
+            Edit Book Details
+        {%else%} 
+            Create Book Details
+        {%endif%}
+        <form method="post" enctype="multipart/form-data" class = "form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-warning" type="submit">Submit</button>
+        </form>
+        <a href="{%url 'book_list'%}">Back</a>
+    </div>
+{% endblock %}

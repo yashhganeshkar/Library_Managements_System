@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Library
+{% endblock %}
+
+{% block content %}
+    <h1 class = "text-center mt-4">Welcome to Library Management System!</h1>
+    <a class="btn btn-primary m-4" href="{% url 'book_create'%}">Add New Book</a>
+    <div class="container row gap-3 mt-0 m-3">
+        {% for book in books %}
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h3 class="card-title">{{book.title}}</h3>
+                <p class="card-text">- by {{book.author}}</p>
+                <a class="btn btn-primary" href="{% url 'book_details' book.id%}">Details</a>
+                {% if book.added_by == request.user %}
+                    <a href="{% url 'book_edit' book.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'book_delete' book.id %}" class="btn btn-danger">Delete</a>
+                {% endif %} 
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
